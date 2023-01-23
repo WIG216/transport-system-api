@@ -16,6 +16,7 @@ import emailController from "./emailController";
 import authCheckController from "./authCheckController";
 import driverController from "./driverController";
 import vehicleController from "./vehicleController";
+import logsController from "./logsController";
 
 
 export default {
@@ -34,6 +35,9 @@ export default {
    // driver
    createDriverController: driverController.signUp,
    loginDriverController: driverController.login,
+
+   // logs
+   getLogController: logsController.getLogs,
 
 
    // for email

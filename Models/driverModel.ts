@@ -35,9 +35,12 @@ const driverSchema = new Schema({
     driverImage: {
         type: String
     },
-    
+
     status: {
-        enum: ["active", "inActive"]
+        enum: {
+            values: ['active', 'inActive'],
+            // message: '{VALUE} is not supported'
+        }
     },
 
     vehicle: {

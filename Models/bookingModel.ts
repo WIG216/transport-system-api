@@ -25,7 +25,10 @@ const bookingSchema = new Schema({
     },
 
     status:{
-        enum: ['active', 'completed', 'pending']
+        enum: {
+            values: ['active', 'completed', 'pending'],
+            // message: '{VALUE} is not supported'
+        }
     },
 
     model: { 
