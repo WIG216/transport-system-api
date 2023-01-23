@@ -25,28 +25,18 @@ const bookingSchema = new Schema({
     },
 
     status:{
+        type: String,
         enum: {
             values: ['active', 'completed', 'pending'],
+            default: 'active'
             // message: '{VALUE} is not supported'
         }
     },
 
-    model: { 
-        type: String, 
-        require: true, 
-    },
-    color: { 
-        type: String, 
-        require: true 
-    },
-    NoSeat: {
-        type: Number,
-        require: true
-    },
-    carImage: {
-        type: String,
-        require: true
-    },
+    // rideId: { 
+    //     type: String, 
+    //     require: true, 
+    // },
 
     ride: {
         type: Schema.Types.ObjectId, ref: "ride"
