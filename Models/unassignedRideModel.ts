@@ -18,10 +18,12 @@ const UnassignedSchema = new Schema({
         type: String, 
         require: true 
     },
+    
     department: { 
         type: Schema.Types.ObjectId,  
         require: true, ref: 'ride' 
     },
+
     day: { 
         type: String, 
         require: true 

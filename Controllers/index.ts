@@ -11,16 +11,17 @@
 
 
 
-// import userController from "./userController";
-// import authCheckController from "./authCheckController";
-import driverController from "./driverController";
-import vehicleController from "./vehicleController";
-import logsController from "./logsController";
-import driverFreeController from "./driverFreeController";
-import freeRideController from "./freeRideController";
-import * as unassignedController from "./unassignedController";
+import authCheckController from "./authCheckController";
 import bookingController from "./bookingController";
+import * as driverController from "./driverController";
+import driverFreeController from "./driverFreeController";
+import emailController from "./emailController";
+import freeRideController from "./freeRideController";
+import logsController from "./logsController";
 import rideController from "./rideController";
+import vehicleController from "./vehicleController";
+import * as unassignedController from "./unassignedController";
+import userController from "./userController";
 
 
 export default {
@@ -69,17 +70,33 @@ export default {
     deleteUnassignedController: unassignedController.default.deleteUnassigned, 
 
    // user
-//    createUserController: userController.signUp,
-//    loginUserController: userController.login,
+   createUserController: userController.signUp,
+   loginUserController: userController.login,
 
    // driver
-   createDriverController: driverController.signUp,
-   loginDriverController: driverController.login,
+   createDriverController: driverController.default.signUp,
+   loginDriverController: driverController.default.login,
+
+   // for drivers
+   getDriversController: driverController.default.getDrivers,
+   getDriverByIdController: driverController.default.getDriverById,
+//    createDriverController: driverController.default.createDriver,
+   updateDriverController: driverController.default.updateADriver, 
+   deleteDriverController: driverController.default.deleteDriver, 
+
+   // for email
+   // for seating
+   getEmailsController: emailController.getEmails,
+   //getSeatingByIdController: seatingController.default.getSeatingById,
+   createEmailControler: emailController.createEmail,
+   updateEmailController: emailController.updateEmail,
+   deleteEmailController: emailController.deleteEmail, 
+   sendMailController: emailController.sendAEmails,
 
    // logs
    getLogController: logsController.getLogs,
 
    // authCheck 
-//    authCheckController: authCheckController.check
+   authCheckController: authCheckController.check
 }
 
