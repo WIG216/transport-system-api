@@ -4,7 +4,7 @@
  *
  * Project: 
  * This is used to boot up our API
- * Created on Tuesday Jan 24 2023
+ * Created on Tuesday Jan 23 2023
 
  */
 
@@ -15,36 +15,22 @@ import messages from "../messages/messages";
 
 import path from "path"
 import mongoosePaginate = require('mongoose-paginate-v2');
-import RideModel from "../Models/rideModel";
-import driversModel from "../Models/driverModel";
+import UnassignedModel from "../Models/unassignedRideModel";
 /**
  * 
- * used to create a Ride
+ * used to create a Unassigned
  *  @param req - request object
  *  @param res - response object
  */
-const createRide = (req: any, res: any) => {
-    let drivers = req.body.driver;
-  
-    RideModel.create(req.body).then((data) => {
-        // adding a ride to a driver
-               drivers.forEach((element:any) => {
-            console.log(element);
-            driversModel.findByIdAndUpdate(element,{$push:{driver:data._id}},{},(departRrr:any, DepartData)=>{
-                
-            })
-        });
-       
-       
+const createUnassigned = (req: any, res: any) => {
+    UnassignedModel.create(req.body).then((data) => {
         res.status(response.CREATED_201);
         res.json({
             success: true,
             docs: data
-        }); 
-    
-    
+        });
     }).catch(err => {
-        res.status(response.OK_200);
+        res.status(response.BAD_REQUEST_400);
         res.json({
             success: false,
             docs: []
@@ -56,37 +42,34 @@ const createRide = (req: any, res: any) => {
 
 /**
  * 
- * used to get Rides
+ * used to get Unassigneds
  *  @param req - request object
  *  @param res - response object
  */
 // 603eb2ee77259abd63745b4d
-const getRides = (req: any, res: any) => {
+const getUnassigned = (req: any, res: any) => {
     const options = {
         page: req.query.page ? req.query.page : 1,
         limit: req.query.limit ? req.query.limit : 10,
     };
-    
-    RideModel.find((err,data)=>{
-      if(!err){
-                 console.log(data)
-            res.status(response.OK_200);
-            res.json({
-                success: true,
-                docs: data
-            });
-      }
-      else{
-        res.status(response.BAD_REQUEST_400);
-                console.log(err)
-                res.json({
-                    success: false,
-                    docs: []
-                })
-      }
-    });
-
-
+    UnassignedModel.find().populate('driver').exec((err,data)=>{
+        if(!err){
+                   console.log(data)
+              res.status(response.OK_200);
+              res.json({
+                  success: true,
+                  docs: data
+              });
+        }
+        else{
+          res.status(response.BAD_REQUEST_400);
+                  console.log(err)
+                  res.json({
+                      success: false,
+                      docs: []
+                  })
+        }
+      });
 };
 
 
@@ -97,14 +80,14 @@ const getRides = (req: any, res: any) => {
  *  @param res - response object
  */
 // 603eb2ee77259abd63745b4d
-const getRideByDriverId = (req: any, res: any) => {
-  let id = req.params.driverId ? req.params.driverId : '';
+const getUnassignedById = (req: any, res: any) => {
+  let id = req.params.id ? req.params.id : '';
   const options = {
       page: req.query.page ? req.query.page : 1,
       limit: req.query.limit ? req.query.limit : 10,
   };
   
-  RideModel.find({driverId:id},(err,data)=>{
+  UnassignedModel.findById(id,(err,data)=>{
     if(!err){
                console.log(data)
           res.status(response.OK_200);
@@ -127,16 +110,15 @@ const getRideByDriverId = (req: any, res: any) => {
 };
 /**
  * 
- * used to update a Ride
+ * used to update a Unassigned
  *  @param req - request object
  *  @param res - response object
  */
-const updateARide = (req: any, res: any) => {
+const updateUnassigned = (req: any, res: any) => {
     let id = req.params.id ? req.params.id : '';
 
     let updateData = req.body;
-
-    RideModel.findOneAndUpdate({ _id: id}, updateData, { new: true }, (err, doc) => {
+    UnassignedModel.findOneAndUpdate({ _id: id}, updateData, { new: true }, (err, doc) => {
         if (err) {
             res.status(response.BAD_REQUEST_400);
             res.json({
@@ -156,19 +138,19 @@ const updateARide = (req: any, res: any) => {
 };
 /**
  * 
- * used to delete a Ride
+ * used to delete a Unassigned
  *  @param req - request object
  *  @param res - response object
  */
- const deleteRide = (req: any, res: any) => {
-    // setting the id of the Ride if passed to {id}
+ const deleteUnassigned = (req: any, res: any) => {
+    // setting the id of the Unassigned if passed to {id}
     let id = req.params.id ? req.params.id : '';
    
-    // deleting the Ride where {id} 
-    RideModel.deleteOne({ _id: id }).then(val => {
-        // Ride deleted
+    // deleting the Unassigned where {id} 
+    UnassignedModel.deleteOne({ _id: id }).then(val => {
+        // Unassigned deleted
         let docCount = val.deletedCount;
-        let responsMessage = docCount ? "Deleted ride" : "Ride Not found";
+        let responsMessage = docCount ? "Deleted document" : "Document Not found";
         res.status(response.OK_200);
         res.json({
             success: true,
@@ -177,22 +159,23 @@ const updateARide = (req: any, res: any) => {
         })
       
     }).catch(err => {
-        // Ride not deleted
+        // Unassigned not deleted
         res.status(response.NO_CONTENT_204);
         res.json({
             success: false,
             message: "Error occured"
         })
     })
-  
-  };
+
+};
+
 
 
 export default {
-  getRides,
-  getRideByDriverId,
-  createRide,
-  updateARide,
-  deleteRide
+  getUnassigned,
+  getUnassignedById,
+  createUnassigned,
+  updateUnassigned,
+  deleteUnassigned
 };
 
