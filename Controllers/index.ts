@@ -23,8 +23,8 @@ export default {
    
     // for class
     getVehiclesController: vehicleController.getVehicle,
-    getClassByCampusIdController: vehicleController.getVehicleById,
-    createClassControler: vehicleController.createVehicle,
+    getVehicleByDriverIdController: vehicleController.getVehicleById,
+    createVehicleControler: vehicleController.createVehicle,
     updateVehicleController: vehicleController.updateAVehicle,
     deleteVehicleController: vehicleController.deleteVehicle,
 

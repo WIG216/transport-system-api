@@ -48,12 +48,14 @@ const rideSchema = new Schema({
         require: true
     },
 
-    user_id: {
-        type: Schema.Types.ObjectId, ref: "user"
+    user: {
+        type: Schema.Types.ObjectId, 
+        ref: "user"
     },
 
-    vehicle: {
-        type: Schema.Types.ObjectId, ref: "vehicle"
+    driver: {
+        type: Schema.Types.ObjectId, 
+        ref: "driver"
     }
 });
 

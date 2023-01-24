@@ -4,7 +4,7 @@
  *
  * Project: 
  * This is used to boot up our API
- * Created on Tuesday Jan 23 2023
+ * Created on Tuesday jan 24 2023
 
  */
 
@@ -13,17 +13,17 @@ import mongoose = require("mongoose");
 import paginator = require("mongoose-paginate-v2");
 
 const Schema = mongoose.Schema;
+
 const passengerSchema = new Schema({
-    data: { 
-        type: String, 
-        require: true 
+    user: {
+        type: Schema.Types.ObjectId, 
+        ref: "user"
     },
-    // create, delete, view, edit, login, logout
-    type: { 
-        type: Boolean, 
-        require: true 
-    },
-    
+
+    booking: {
+        type: Schema.Types.ObjectId, 
+        ref: "booking"
+    }
 });
 
 passengerSchema.plugin(paginator);

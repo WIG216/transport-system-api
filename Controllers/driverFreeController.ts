@@ -1,37 +1,35 @@
 /*
- * Author: Cliff
+ * Author: Ntokungwia Zidane
  * Contributors: 
  *
  * Project: 
  * This is used to boot up our API
- * Created on Monday jan 23 2023
+ * Created on Tuesday Jan 18 2022
 
  */
 
-import logger from "../logger";
 import response from "../messages/response";
 import messages from "../messages/messages";
 
 
 import path from "path"
 import mongoosePaginate = require('mongoose-paginate-v2');
-import BookingModel from "../Models/bookingModel";
-
+import driverFreeModel from "../Models/driverFreeModel"
 /**
  * 
- * used to create a booking
+ * used to create a lecturerFree
  *  @param req - request object
  *  @param res - response object
  */
-const createBooking = (req: any, res: any) => {
-    BookingModel.create(req.body).then((data) => {
+const create = (req: any, res: any) => {
+    driverFreeModel.create(req.body).then((data) => {
         res.status(response.CREATED_201);
         res.json({
             success: true,
             docs: data
         });
     }).catch(err => {
-        res.status(response.OK_200);
+        res.status(response.BAD_REQUEST_400);
         res.json({
             success: false,
             docs: []
@@ -43,34 +41,34 @@ const createBooking = (req: any, res: any) => {
 
 /**
  * 
- * used to get booking
+ * used to get lecturerFrees
  *  @param req - request object
  *  @param res - response object
  */
-const getBooking = (req: any, res: any) => {
+// 603eb2ee77259abd63745b4d
+const getDriversFree = (req: any, res: any) => {
     const options = {
         page: req.query.page ? req.query.page : 1,
         limit: req.query.limit ? req.query.limit : 10,
     };
-    
-    BookingModel.find((err,data)=>{
-      if(!err){
-                 console.log(data)
-            res.status(response.OK_200);
-            res.json({
-                success: true,
-                docs: data
-            });
-      }
-      else{
-        res.status(response.BAD_REQUEST_400);
-                console.log(err)
-                res.json({
-                    success: false,
-                    docs: []
-                })
-      }
-    });
+    driverFreeModel.find((err,data)=>{
+        if(!err){
+                   console.log(data)
+              res.status(response.OK_200);
+              res.json({
+                  success: true,
+                  docs: data
+              });
+        }
+        else{
+          res.status(response.BAD_REQUEST_400);
+                  console.log(err)
+                  res.json({
+                      success: false,
+                      docs: []
+                  })
+        }
+      });
 
 
 };
@@ -78,19 +76,19 @@ const getBooking = (req: any, res: any) => {
 
 /**
  * 
- * used to get a booking by id
+ * used to get a lecturer free state by id
  *  @param req - request object
  *  @param res - response object
  */
-// 603eb2ee77259abd63745b4d
-const getBookingById = (req: any, res: any) => {
+
+const getDriverFreeById = (req: any, res: any) => {
   let id = req.params.id ? req.params.id : '';
   const options = {
       page: req.query.page ? req.query.page : 1,
       limit: req.query.limit ? req.query.limit : 10,
   };
   
-  BookingModel.findById(id,(err,data)=>{
+  driverFreeModel.findById(id,(err,data)=>{
     if(!err){
                console.log(data)
           res.status(response.OK_200);
@@ -113,18 +111,17 @@ const getBookingById = (req: any, res: any) => {
 };
 /**
  * 
- * used to update a booking
+ * used to update a driverFree
  *  @param req - request object
  *  @param res - response object
  */
-const updateABooking = (req: any, res: any) => {
+const updateDriverFree = (req: any, res: any) => {
     let id = req.params.id ? req.params.id : '';
 
     let updateData = req.body;
-
-    BookingModel.findOneAndUpdate({ _id: id}, updateData, { new: true }, (err, doc) => {
+    driverFreeModel.findOneAndUpdate({ _id: id}, updateData, { new: true }, (err, doc) => {
         if (err) {
-            res.status(response.OK_200);
+            res.status(response.BAD_REQUEST_400);
             res.json({
                 success: false,
                 docs: []
@@ -142,19 +139,19 @@ const updateABooking = (req: any, res: any) => {
 };
 /**
  * 
- * used to delete a booking
+ * used to delete a driverFree
  *  @param req - request object
  *  @param res - response object
  */
- const deleteBooking = (req: any, res: any) => {
-    // setting the id of the booking if passed to {id}
+ const deleteDriverFree = (req: any, res: any) => {
+    // setting the id of the lecturerFree if passed to {id}
     let id = req.params.id ? req.params.id : '';
    
-    // deleting the booking where {id} 
-    BookingModel.deleteOne({ _id: id }).then(val => {
-        // booking deleted
+    // deleting the driverFree where {id} 
+    driverFreeModel.deleteOne({ _id: id }).then(val => {
+        // lecturerFree deleted
         let docCount = val.deletedCount;
-        let responsMessage = docCount ? "Deleted booking" : "booking Not found";
+        let responsMessage = docCount ? "Deleted document" : "Document Not found";
         res.status(response.OK_200);
         res.json({
             success: true,
@@ -163,22 +160,23 @@ const updateABooking = (req: any, res: any) => {
         })
       
     }).catch(err => {
-        // booking not deleted
+        // lecturerFree not deleted
         res.status(response.NO_CONTENT_204);
         res.json({
             success: false,
             message: "Error occured"
         })
     })
-  
-  };
+
+};
+
 
 
 export default {
-  getBooking,
-  getBookingById,
-  createBooking,
-  updateABooking,
-  deleteBooking
+    getDriversFree,
+  getDriverFreeById,
+  create,
+  updateDriverFree,
+  deleteDriverFree
 };
 

@@ -16,6 +16,7 @@ import messages from "../messages/messages";
 import path from "path"
 import mongoosePaginate = require('mongoose-paginate-v2');
 import RideModel from "../Models/rideModel";
+import driversModel from "../Models/driverModel";
 /**
  * 
  * used to create a Ride
@@ -23,13 +24,13 @@ import RideModel from "../Models/rideModel";
  *  @param res - response object
  */
 const createRide = (req: any, res: any) => {
-    let departments = req.body.departments;
+    let drivers = req.body.driver;
   
     RideModel.create(req.body).then((data) => {
-        // adding a lab to a department
-               departments.forEach((element:any) => {
+        // adding a ride to a driver
+               drivers.forEach((element:any) => {
             console.log(element);
-            departmentsModel.findByIdAndUpdate(element,{$push:{laboratories:data._id}},{},(departRrr:any, DepartData)=>{
+            driversModel.findByIdAndUpdate(element,{$push:{driver:data._id}},{},(departRrr:any, DepartData)=>{
                 
             })
         });
@@ -96,14 +97,14 @@ const getRide = (req: any, res: any) => {
  *  @param res - response object
  */
 // 603eb2ee77259abd63745b4d
-const getRideByCampusId = (req: any, res: any) => {
-  let id = req.params.campusId ? req.params.campusId : '';
+const getRideByDriverId = (req: any, res: any) => {
+  let id = req.params.driverId ? req.params.driverId : '';
   const options = {
       page: req.query.page ? req.query.page : 1,
       limit: req.query.limit ? req.query.limit : 10,
   };
   
-  RideModel.find({campusId:id},(err,data)=>{
+  RideModel.find({driverId:id},(err,data)=>{
     if(!err){
                console.log(data)
           res.status(response.OK_200);
@@ -167,7 +168,7 @@ const updateARide = (req: any, res: any) => {
     RideModel.deleteOne({ _id: id }).then(val => {
         // Ride deleted
         let docCount = val.deletedCount;
-        let responsMessage = docCount ? "Delleted document" : "Document Not found";
+        let responsMessage = docCount ? "Deleted ride" : "Ride Not found";
         res.status(response.OK_200);
         res.json({
             success: true,
@@ -189,7 +190,7 @@ const updateARide = (req: any, res: any) => {
 
 export default {
   getRide,
-  getRideByCampusId,
+  getRideByDriverId,
   createRide,
   updateARide,
   deleteRide
