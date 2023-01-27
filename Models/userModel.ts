@@ -18,8 +18,9 @@ const userSchema = new Schema({
         type: String,
         require: true
     },
+    
     bdate: {
-        type: Date,
+        type: String,
         require: true
     },
 
@@ -34,9 +35,15 @@ const userSchema = new Schema({
         require: true 
     },
 
+    resetPasswordToken: {
+        type: String,
+        required: false,
+        default: null
+      },
+
     image: {
         type: String,
-        require: true 
+        default: null
     }
 
 });

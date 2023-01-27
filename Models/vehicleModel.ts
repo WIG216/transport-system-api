@@ -22,17 +22,25 @@ const vehicleSchema = new Schema({
         type: String, 
         require: true, 
     },
+
     color: { 
         type: String, 
         require: true 
     },
+
     NoSeat: {
         type: Number,
         require: true
     },
+
     carImage: {
         type: String,
         require: true
+    },
+
+    driverId: {
+        type: Schema.Types.ObjectId,
+        ref: "driver"
     }
 });
 

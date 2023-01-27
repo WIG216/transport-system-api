@@ -19,7 +19,7 @@ let options = {
 
 }
 let startMongo = () => {
-  mongoose.connect('mongodb+srv://EnthCliff:transport-system@cluster0.lpd9b0o.mongodb.net/?retryWrites=true&w=majority',options);
+  mongoose.connect('mongodb+srv://EnthCliff:transport-system@cluster0.lpd9b0o.mongodb.net/transport-system-api?retryWrites=true&w=majority',options);
   const connection = mongoose.connection;
     return connection;
 }

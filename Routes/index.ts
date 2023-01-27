@@ -9,12 +9,23 @@
  */
  
 import userRoute from "./userRoute";
-import logRoute from "./logRoute";
+import bookingRoute from "./bookingRoute";
 import emailRoute from "./emailRoute";
+import driverRoute from "./driverRoute";
+import rideRoute from "./rideRoute";
+import logRoute from "./logRoute";
+import unassignedRoutes from './unassignedRoute';
+import vehicleRoute from "./vehicleRoute";
+
 
 
 export default {
     logRoute,
     userRoute,
     emailRoute,
+    bookingRoute,
+    driverRoute,
+    rideRoute,
+    unassignedRoutes,
+    vehicleRoute,
 }

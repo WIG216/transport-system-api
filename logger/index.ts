@@ -4,9 +4,8 @@
  * Contributors: 
  *
  * Project: Bato API
- * This is a default file description //TODO: change description for comments
- * Created on Thu Feb 25 2021
- * Copyright (c) 2021 Omevision Ltd
+ * This is a default file description
+ * Created on Mod Jan 23 2023
  */
 
 import { Logger } from "tslog";

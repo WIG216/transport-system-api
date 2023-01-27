@@ -249,7 +249,7 @@ const updateADriver = (req: any, res: any) => {
     driverModel.deleteOne({ _id: id }).then(val => {
         // lecturer deleted
         let docCount = val.deletedCount;
-        let responsMessage = docCount ? "Delleted document" : "Document Not found";
+        let responsMessage = docCount ? "Deleted document" : "Document Not found";
         res.status(response.OK_200);
         res.json({
             success: true,

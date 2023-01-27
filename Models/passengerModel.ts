@@ -15,12 +15,17 @@ import paginator = require("mongoose-paginate-v2");
 const Schema = mongoose.Schema;
 
 const passengerSchema = new Schema({
-    user: {
+    userId: {
         type: Schema.Types.ObjectId, 
         ref: "user"
     },
 
-    booking: {
+    driverId: {
+        type: Schema.Types.ObjectId,
+        ref: "driver"
+    },
+
+    bookingId: {
         type: Schema.Types.ObjectId, 
         ref: "booking"
     }

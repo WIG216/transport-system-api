@@ -14,12 +14,12 @@ import paginator = require("mongoose-paginate-v2");
 
 const Schema = mongoose.Schema;
 const bookingSchema = new Schema({
-    senderId:{
+    userId:{
         type: Schema.Types.ObjectId, 
         ref: "user"
     },
 
-    receiverId:{
+    driverId:{
         type: Schema.Types.ObjectId, 
         ref: "driver"
     },
@@ -27,21 +27,15 @@ const bookingSchema = new Schema({
     status:{
         type: String,
         enum: {
-            values: ['active', 'completed', 'pending'],
-            default: 'active'
-            // message: '{VALUE} is not supported'
+            values: ['active', 'completed', 'pending']
+           // message: '{VALUE} is not supported'
         }
     },
 
-    // rideId: { 
-    //     type: String, 
-    //     require: true, 
-    // },
-
-    ride: {
-        type: Schema.Types.ObjectId, ref: "ride"
-    }
+    // ride: {
+    //     type: Schema.Types.ObjectId, ref: "ride"
+    // }
 });
 
 bookingSchema.plugin(paginator);
-export default mongoose.model('Booking', bookingSchema);
+export default mongoose.model('booking', bookingSchema);

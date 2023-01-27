@@ -14,9 +14,7 @@
 import authCheckController from "./authCheckController";
 import bookingController from "./bookingController";
 import * as driverController from "./driverController";
-import driverFreeController from "./driverFreeController";
 import emailController from "./emailController";
-import freeRideController from "./freeRideController";
 import logsController from "./logsController";
 import rideController from "./rideController";
 import vehicleController from "./vehicleController";
@@ -33,13 +31,6 @@ export default {
     updateVehicleController: vehicleController.updateAVehicle,
     deleteVehicleController: vehicleController.deleteVehicle,
 
-    // free driver state 
-    getFreeDriverStateController: driverFreeController.getDriversFree,
-    getFreeDriverStateByIdController: driverFreeController.getDriverFreeById,
-    createFreeDriverStateController: driverFreeController.create,
-    updateFreeDriverStateController: driverFreeController.updateDriverFree,
-    deleteFreeDriverStateController: driverFreeController.deleteDriverFree,
-
     // ride
     getRidesController: rideController.getRides,
     getRideByIdController: rideController.getRideByDriverId,
@@ -53,14 +44,6 @@ export default {
     createBookingController: bookingController.createBooking,
     updateBookingController: bookingController.updateABooking,
     deleteBookingController: bookingController.deleteBooking,
-    
-
-    // free ride state 
-    getFreeRideStateController: freeRideController.getFreeRides,
-    getFreeRideStateByIdController: freeRideController.getFreeRideById,
-    createFreeRideStateController: freeRideController.create,
-    updateFreeRideStateController: freeRideController.updateFreeRide,
-    deleteFreeRideStateController: freeRideController.deleteFreeRide,
 
     // for unassigned
     getUnassignedController: unassignedController.default.getUnassigned,
@@ -72,6 +55,7 @@ export default {
    // user
    createUserController: userController.signUp,
    loginUserController: userController.login,
+   updateUserController: userController.updateUser,
 
    // driver
    createDriverController: driverController.default.signUp,

@@ -19,7 +19,8 @@ import authMiddleware from "../middlewares";
 const router = express.Router();
 
 router.post("/user/signup/",authMiddleware.verifySignUp, controller.createUserController);
-router.post("/user/login/", controller.loginUserController);
+router.post("/user/login/",authMiddleware.verifySignUp, controller.loginUserController);
+router.post("/user/update/",authMiddleware.verifySignUp, controller.updateUserController);
 router.post("auth-check/",authMiddleware.verifySignUp, controller.authCheckController);
 
 export default router;
