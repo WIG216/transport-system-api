@@ -14,7 +14,7 @@ import paginator = require("mongoose-paginate-v2");
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
         require: true
     },
@@ -41,7 +41,7 @@ const userSchema = new Schema({
         default: null
       },
 
-    image: {
+    imageUrl: {
         type: String,
         default: null
     }

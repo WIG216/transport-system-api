@@ -25,7 +25,7 @@ router.post("/auth-check/",authMiddleware.verifySignUp, controller.authCheckCont
 
 router.get("/driver/",authMiddleware.authJwt.default.verifyToken, controller.getDriversController);
 router.get("/driver/:id",authMiddleware.authJwt.default.verifyToken, controller.getDriverByIdController);
-router.post("/driver-create/",authMiddleware.authJwt.default.verifyToken, controller.createDriverController);
+router.post("/driver/",authMiddleware.authJwt.default.verifyToken, controller.createDriverController);
 router.patch("/driver/:id",authMiddleware.authJwt.default.verifyToken, controller.updateDriverController);
 router.delete("/driver/:id",authMiddleware.authJwt.default.verifyToken, controller.deleteDriverController);
 

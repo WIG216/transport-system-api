@@ -14,7 +14,7 @@ import paginator = require("mongoose-paginate-v2");
 
 const Schema = mongoose.Schema;
 const driverSchema = new Schema({
-    name: {
+    driverName: {
         type: String,
         require: true
     },
@@ -37,16 +37,26 @@ const driverSchema = new Schema({
     },
 
     status: {
-        enum: {
-            values: ['active', 'inActive'],
-            // message: '{VALUE} is not supported'
-        }
+        type: String,
+        default: 'active'
+        // enum: {
+        //     values: ['active', 'inActive'],
+        //     // message: '{VALUE} is not supported'
+        // }
     },
 
     vehicle: {
         type: Schema.Types.ObjectId, ref: "vehicle"
     }
 
+}, { timestamps: true });
+
+driverSchema.pre('remove', function(next) {
+    // CourseContent.remove({classroom_id: this._id}).exec();
+    // PassExamContent.remove({class_room_id: this._id});
+    // Participant.remove({class_room_id: this._id});
+    
+    next();
 });
 
 driverSchema.plugin(paginator);
