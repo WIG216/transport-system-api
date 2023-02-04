@@ -18,7 +18,7 @@ import authMiddleware from "../middlewares/index";
 
 const router = express.Router();
 
-router.get("/vehicle/",authMiddleware.authJwt.default.verifyToken, controller.getVehiclesController);
+router.get("/vehicles/",authMiddleware.authJwt.default.verifyToken, controller.getVehiclesController);
 router.get("/vehicle/:id",authMiddleware.authJwt.default.verifyToken, controller.getVehicleByDriverIdController);
 router.post("/vehicle/",authMiddleware.authJwt.default.verifyToken, controller.createVehicleController);
 router.patch("/vehicle/:id",authMiddleware.authJwt.default.verifyToken, controller.updateVehicleController);

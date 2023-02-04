@@ -41,10 +41,11 @@ const signUp = (req,res)=>{
     
         
         driverModel.create({
-            name: req.body.name,
+            driverName: req.body.driverName,
             email: req.body.email,
             bdate: req.body.bdate,
             password: hash,
+            status: req.body.status,
             driverImage: req.body.driverImage
 
         }).then((data) => {
@@ -86,24 +87,22 @@ const login = (req,res)=>{
             user.password
           );
           console.log(passwordIsValid);
-          
-            console.log(user.password, req.body.password);
-            
+      
+          console.log(user.password, req.body.password);
+      
           if (!passwordIsValid) {
             return res.status(401).send({
               accessToken: null,
               message: "Invalid Password!"
             });
           }
-    
-          var token = jwt.sign({ id: user.id }, config.secret, {
-            expiresIn: 10800 
-          });
-    
+      
+          var token = jwt.sign({ id: user._id, email: user.email }, config.secret, {
+            expiresIn: 86400, // 24 hours
+          });   
+      
           res.status(200).send({
-            // id: user._id,
-            email: user.email,
-            token: token
+            accessToken: token,
           });
         });
 }
@@ -120,7 +119,8 @@ const createDriver = (req: any, res: any) => {
         res.status(response.CREATED_201);
         res.json({
             success: true,
-            docs: data
+            docs: data,
+            message: "Created successfully"
         });
     }).catch(err => {
         console.log(err);

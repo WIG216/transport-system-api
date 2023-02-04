@@ -14,7 +14,7 @@ import paginator = require("mongoose-paginate-v2");
 
 const Schema = mongoose.Schema;
 const vehicleSchema = new Schema({
-    name: {
+    vehicleName: {
         type: String,
         require: true
     },
@@ -42,7 +42,7 @@ const vehicleSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "driver"
     }
-});
+}, { timestamps: true });
 
 vehicleSchema.plugin(paginator);
 export default mongoose.model('vehicle', vehicleSchema);

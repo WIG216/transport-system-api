@@ -98,7 +98,7 @@ const login = (req, res) => {
 
     var token = jwt.sign({ id: user._id, email: user.email }, config.secret, {
       expiresIn: 86400, // 24 hours
-    });
+    });   
 
     res.status(200).send({
       accessToken: token,

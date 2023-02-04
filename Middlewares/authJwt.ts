@@ -1,6 +1,8 @@
 import  jwt = require("jsonwebtoken");
 const  config = require("../config/config");
 import userModel = require("../Models/userModel");
+import driverModel = require("../Models/driverModel");
+
 
 
 

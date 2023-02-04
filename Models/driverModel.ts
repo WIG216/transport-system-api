@@ -19,7 +19,7 @@ const driverSchema = new Schema({
         require: true
     },
     bdate: {
-        type: Date,
+        type: String,
         require: true
     },
 
@@ -38,16 +38,16 @@ const driverSchema = new Schema({
 
     status: {
         type: String,
-        default: 'active'
         // enum: {
         //     values: ['active', 'inActive'],
         //     // message: '{VALUE} is not supported'
         // }
     },
 
-    vehicle: {
-        type: Schema.Types.ObjectId, ref: "vehicle"
-    }
+    // vehicle: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "vehicle"
+    // }
 
 }, { timestamps: true });
 
