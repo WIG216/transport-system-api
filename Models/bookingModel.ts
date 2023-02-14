@@ -9,33 +9,46 @@
  */
 
 
-import mongoose = require("mongoose");
-import paginator = require("mongoose-paginate-v2");
+import mongoose from "mongoose";
+import paginator from "mongoose-paginate-v2";
 
-const Schema = mongoose.Schema;
-const bookingSchema = new Schema({
-    userId:{
-        type: Schema.Types.ObjectId, 
-        ref: "user"
-    },
-
-    driverId:{
-        type: Schema.Types.ObjectId, 
-        ref: "driver"
-    },
-
-    status:{
+const bookingSchema = new mongoose.Schema(
+    {
+      userId: {
+        type: String
+      },
+      
+      userEmail: {
         type: String,
-        enum: {
-            values: ['active', 'completed', 'pending']
-           // message: '{VALUE} is not supported'
-        }
+        required: true,
+      },
+  
+      fullName: {
+        type: String,
+        required: true,
+      },
+  
+      tourName: {
+          type: String,
+          required: true
+      },
+  
+      phone: {
+        type: Number,
+        required: true,
+      },
+  
+      guestSize: {
+        type: Number,
+        required: true,
+      },
+  
+      bookAt: {
+          type: Date,
+          required: true
+      }
     },
-
-    // ride: {
-    //     type: Schema.Types.ObjectId, ref: "ride"
-    // }
-});
-
-bookingSchema.plugin(paginator);
-export default mongoose.model('booking', bookingSchema);
+    { timestamps: true }
+  );
+  
+  export default mongoose.model("Booking", bookingSchema);
